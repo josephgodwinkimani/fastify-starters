@@ -6,8 +6,8 @@ import helmet from "@fastify/helmet";
 import multipart from "@fastify/multipart";
 import fastifyRateLimit from "@fastify/rate-limit";
 import fastifyStatic from "@fastify/static";
+import swagger from "@fastify/swagger";
 import type { FastifyInstance } from "fastify";
-import swagger from '@fastify/swagger';
 
 export const registerPlugins = (app: FastifyInstance): void => {
   // add full Express compatibility to Fastify, it exposes the same use function of Express, and it allows you to use any Express middleware or application
@@ -52,8 +52,8 @@ export const registerPlugins = (app: FastifyInstance): void => {
 
   // serving static files as fast as possible
   app.register(fastifyStatic, {
-    root: path.join(__dirname, '../../public'),
-    prefix: '/public/', // optional: default '/'
+    root: path.join(__dirname, "../../public"),
+    prefix: "/public/", // optional: default '/'
     //wildcard: false,
   });
 
@@ -61,25 +61,26 @@ export const registerPlugins = (app: FastifyInstance): void => {
   app.register(swagger, {
     openapi: {
       info: {
-        title: 'My API',
-        description: 'documentation for my api',
-        version: '1.0.0'
+        title: "My API",
+        description: "documentation for my api",
+        version: "1.0.0",
       },
-      servers: [{
-        url: `http://localhost:${process.env.PORT}`
-      }],
+      servers: [
+        {
+          url: `http://localhost:${process.env.PORT}`,
+        },
+      ],
       components: {
         securitySchemes: {
           apiKey: {
-            type: 'apiKey',
-            name: 'apiKey',
-            in: 'header'
-          }
-        }
-      }
+            type: "apiKey",
+            name: "apiKey",
+            in: "header",
+          },
+        },
+      },
     },
     hideUntagged: true,
-    exposeRoute: true
+    exposeRoute: true,
   });
-
 };
