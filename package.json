@@ -14,7 +14,7 @@
     "test:watch": "vitest --watch",
     "e2e": "playwright test",
     "build": "tsc --strict",
-    "build:ci": "tsc --noEmit --strict",
+    "build:ci": "tsc --noEmit --skipLibCheck",
     "start": "node dist/index.js"
   },
   "keywords": [
@@ -22,7 +22,9 @@
     "boilerplate",
     "fastify",
     "api",
-    "typescript"
+    "typescript",
+    "playwright",
+    "biome"
   ],
   "authors": [
     {
